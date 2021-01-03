@@ -46,6 +46,10 @@ function fider_api_query($endpoint) {
     if (!is_array($response)) {
         return ['error' => 'unknown'];
     }
+    file_put_contents(
+        __DIR__ . '/fider-' . trim(preg_replace('#[^a-z0-9]+#', '-', $endpoint), '-') . '.json',
+        json_encode($response, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+    );
 
     return $response;
 }
